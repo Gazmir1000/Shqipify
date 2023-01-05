@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Shqipify.Models.PostViewModel>
+
+@{
+    var successMessage = TempData["successMessage"]?.ToString();
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+
+@if (!string.IsNullOrWhiteSpace(successMessage))
+{
+    <div class="alert alert-success">
+        <strong>Sukses</strong> @successMessage
+              <button type="button" class="btn-close float-end" data-bs-dissmiss="alert"></button>
+    </div>
+  
+}
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-error">
+        <strong>Error</strong> @errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dissmiss="alert"></button>
+    </div>
+  
+}
+<div class="d-flex justify-content-center align-items-center flex-column">
+    @if(Model!=null && Model.Any())
+        { 
+        @foreach(var post in Model)
+        {
+            <div class="col mb-3" style="max-width:700px">
+                <div class="card" style="width: 100%;">
+                    <img class="card-img-top" src="@post.Image" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@post.Title</h5>
+                        <p class="card-text">@post.Description</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <strong>Author: @post.Author</strong>
+                            <strong>@post.CreatedTime.ToString("dd-MM-yyyy")</strong>
+                        </div>
+                    </div>
+                </div>
+           
+        </div> 
+        }
+        }
+            else{
+            <h1>No posts</h1>
+        }
+  
+       
+       
+    </div>

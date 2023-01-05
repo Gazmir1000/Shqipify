@@ -1,0 +1,65 @@
+﻿@model Shqipify.Models.PostViewModel
+
+@{
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+
+
+
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-error">
+        <strong>Error</strong> @errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dissmiss="alert"></button>
+    </div>
+}
+<form action="Create" method="post">
+    <div class="mb-2">
+        <label class="form-label">Titulli</label>
+        <input type="text" class="form-control" asp-for="Title"/>
+        <span asp-validation-for="Title" class="text-danger" ></span>
+    </div>  
+    <div class="mb-2">
+        <label class="form-label">Pershkrimi</label>
+        <textarea class="form-control" asp-for="Description"></textarea>
+        <span asp-validation-for="Description" class="text-danger" ></span>
+    </div> 
+    <div class="mb-2">
+        <label for="post-image" class="form-label">Ngarko foto</label>
+        <input id="add-image" name="post-image" type="file" class="form-control" asp-for="Image" />
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <div>
+        <button type="submit" class="btn-outline-primary">Krijo</button>
+    </div>
+
+</form>
+
+
+@section Scripts
+    {
+    <script type="text/javascript" language="javascript">
+
+        const convertBase64 = (file) => {
+            return new Promise((resolve, reject) => {
+                const fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+
+                fileReader.onload = () => {
+                    resolve(fileReader.result);
+                };
+
+                fileReader.onerror = (error) => {
+                    reject(error);
+                };
+            });
+        };
+
+        document.getElementById('add-image').addEventListener('change', async(e) => {
+            console.log(e)
+            let temp = e.target.files[0]
+            let converted = await convertBase64(temp)
+            document.getElementById('add-image').value = converted
+        })
+    </script>
+ }
