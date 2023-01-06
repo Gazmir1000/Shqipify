@@ -12,8 +12,11 @@ builder.Services.AddDbContext<PostDBContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConection"))
 );
 
-builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddEntityFrameworkStores<ShqipifyDbContext>();
+
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<ShqipifyDbContext>()
+            .AddDefaultUI()
+            .AddDefaultTokenProviders();
 
 builder.Services.AddDbContext<ShqipifyDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConection")));
@@ -42,4 +45,8 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
+using (var scope = app.Services.CreateScope())
+{
+    await DbSeeder.SeedRolesAndAdminAsync(scope.ServiceProvider);
+}
 app.Run();

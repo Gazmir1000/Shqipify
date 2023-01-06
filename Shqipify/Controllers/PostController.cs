@@ -1,14 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Shqipify.Areas.Identity.Data;
 using Shqipify.DAL;
 using Shqipify.Models;
 using Shqipify.Models.DBEnteties;
+using System.Security.Claims;
 
 namespace Shqipify.Controllers
 {
     public class PostController : Controller
     {
 
+
         private readonly PostDBContext _context;
+   
+
         public PostController(PostDBContext context)
         {
             this._context = context;
@@ -42,22 +49,35 @@ namespace Shqipify.Controllers
                      
           
         }
+         [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
+      
+        [Authorize]
         [HttpPost]
-        public IActionResult Create(PostViewModel postData)
+
+
+        public async Task<IActionResult> CreateAsync(PostViewModel postData)
         {
-            if(ModelState.IsValid)
+
+           
+
+            if (ModelState.IsValid)
             {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                //ClaimsPrincipal currentUser = this.User;
+                //  var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+                // AppUser user = await _userManager.FindByIdAsync(currentUserName);
                 var post = new Post()
                 {
                     Title = postData.Title,
                     Description = postData.Description,
                     Image = postData.Image,
-                    Author="Gazmir Feimi",
+                    Author= "Gazi",
+                    UserId= userId,
                     CreatedTime=DateTime.Now,
                     
 

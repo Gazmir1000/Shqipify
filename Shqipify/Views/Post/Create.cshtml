@@ -2,6 +2,7 @@
 
 @{
     var errorMessage = TempData["errorMessage"]?.ToString();
+  
 }
 
 
@@ -26,7 +27,8 @@
     </div> 
     <div class="mb-2">
         <label for="post-image" class="form-label">Ngarko foto</label>
-        <input id="add-image" name="post-image" type="file" class="form-control" asp-for="Image" />
+        <input type="text" class="form-control" asp-for="Image" />
+       @* <input id="add-image" name="post-image" type="file" class="form-control" asp-for="Image" />*@
         <span asp-validation-for="Image" class="text-danger"></span>
     </div>
     <div>
@@ -35,31 +37,3 @@
 
 </form>
 
-
-@section Scripts
-    {
-    <script type="text/javascript" language="javascript">
-
-        const convertBase64 = (file) => {
-            return new Promise((resolve, reject) => {
-                const fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-
-                fileReader.onload = () => {
-                    resolve(fileReader.result);
-                };
-
-                fileReader.onerror = (error) => {
-                    reject(error);
-                };
-            });
-        };
-
-        document.getElementById('add-image').addEventListener('change', async(e) => {
-            console.log(e)
-            let temp = e.target.files[0]
-            let converted = await convertBase64(temp)
-            document.getElementById('add-image').value = converted
-        })
-    </script>
- }
