@@ -1,0 +1,25 @@
+﻿@model Shqipify.Models.UniversityViewModel
+
+@{
+    var errorMessage = TempData["errorMessage"]?.ToString();
+
+}
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-error">
+        <strong>Error</strong> @errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dissmiss="alert"></button>
+    </div>
+}
+<form action="Create" method="post">
+    <div class="mb-2">
+        <label class="form-label">Titulli</label>
+        <input type="text" class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div>
+        <button type="submit" class="btn-outline-primary">Krijo</button>
+    </div>
+
+</form>
+

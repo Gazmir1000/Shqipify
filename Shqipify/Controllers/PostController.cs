@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Shqipify.Areas.Identity.Data;
 using Shqipify.DAL;
@@ -11,14 +12,16 @@ namespace Shqipify.Controllers
 {
     public class PostController : Controller
     {
-
-
+        private readonly UserManager<AppUser> _userManager;
+       
         private readonly PostDBContext _context;
-   
 
-        public PostController(PostDBContext context)
+
+
+        public PostController(PostDBContext context, UserManager<AppUser> userManager)
         {
             this._context = context;
+            _userManager = userManager;
         }
         [HttpGet]
         public IActionResult Index()
@@ -62,22 +65,18 @@ namespace Shqipify.Controllers
 
         public async Task<IActionResult> CreateAsync(PostViewModel postData)
         {
+            var loggedUser = await _userManager.GetUserAsync(User);
 
-           
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && loggedUser!=null)
             {
-                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                //ClaimsPrincipal currentUser = this.User;
-                //  var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-                // AppUser user = await _userManager.FindByIdAsync(currentUserName);
                 var post = new Post()
                 {
                     Title = postData.Title,
                     Description = postData.Description,
                     Image = postData.Image,
-                    Author= "Gazi",
-                    UserId= userId,
+                    Author= loggedUser.Firstname +" "+ loggedUser.Lastname,
+                    UserId= loggedUser.Id,
                     CreatedTime=DateTime.Now,
                     
 
@@ -96,6 +95,9 @@ namespace Shqipify.Controllers
             }
          
         }
+
+
+
 
 
     }

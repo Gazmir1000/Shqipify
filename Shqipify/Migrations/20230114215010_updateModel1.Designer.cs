@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shqipify.DAL;
 
@@ -11,9 +12,11 @@ using Shqipify.DAL;
 namespace Shqipify.Migrations
 {
     [DbContext(typeof(PostDBContext))]
-    partial class PostDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230114215010_updateModel1")]
+    partial class updateModel1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

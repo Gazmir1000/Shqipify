@@ -1,0 +1,23 @@
+﻿@{
+    var post = ViewData["postId"];
+}
+@model Shqipify.Models.CommentViewModel
+
+<form action="Create" asp- method="post">
+
+    <div class="mb-2">
+        <label class="form-label">Post ID</label>
+        <input type="text" class="form-control" asp-for="PostId" value="@post" readonly />
+        <span asp-validation-for="PostId" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label class="form-label">Komenti</label>
+        <textarea class="form-control" asp-for="Text"></textarea>
+        <span asp-validation-for="Text" class="text-danger"></span>
+    </div>
+
+    <div>
+        <button type="submit" class="btn-outline-primary">Krijo</button>
+    </div>
+
+</form>

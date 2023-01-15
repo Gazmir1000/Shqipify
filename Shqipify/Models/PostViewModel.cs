@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Shqipify.Models.DBEnteties;
+using System.ComponentModel.DataAnnotations;
 
 namespace Shqipify.Models
 {
@@ -19,6 +20,7 @@ namespace Shqipify.Models
         public string? Author { get; set; }
         
         public DateTime CreatedTime { get; set; }
+        public List<Comments>? Comments { get; set; }
 
     }
 }

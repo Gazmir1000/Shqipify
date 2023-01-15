@@ -9,5 +9,7 @@ namespace Shqipify.DAL
         {
         }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Comments> Comments { get; set; }
+        public DbSet<University> Universities { get; set; }
     }
 }

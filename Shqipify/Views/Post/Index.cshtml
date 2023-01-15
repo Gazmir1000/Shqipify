@@ -36,6 +36,24 @@
                             <strong>Author: @post.Author</strong>
                             <strong>@post.CreatedTime.ToString("dd-MM-yyyy")</strong>
                         </div>
+                        <div>
+                            @if(post.Comments !=null){
+                            @foreach(var comment in post.Comments)
+                            {
+                            <div>@comment.Text</div>
+                            }
+                            }else{
+                                <a class="btn btn-secondary" asp-asp-controller="Comment" asp-action="Index" asp-route-id="@post.Id">Be the first to comment...</a>
+                            }
+                            @if (post.Comments != null)
+                            {
+                                <a class="btn btn-secondary" asp-asp-controller="Comment" asp-action="Index" asp-route-id="@post.Id">Add comment...</a>
+                            }
+                            
+                           
+                           
+                           
+                        </div>
                     </div>
                 </div>
            
@@ -46,6 +64,5 @@
             <h1>No posts</h1>
         }
   
-       
-       
+ 
     </div>

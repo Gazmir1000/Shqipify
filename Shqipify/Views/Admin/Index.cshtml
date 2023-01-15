@@ -1,1 +1,49 @@
-﻿<h1>This is the admin panel</h1>
+﻿@model IEnumerable<Shqipify.Models.UniversityViewModel>
+
+    <button class="btn-primary mb-3">
+    <a class="nav-link text-white" asp-area="" asp-controller="Admin" asp-action="Create">Create University</a>
+    </button>
+<div class="d-flex justify-content-center align-items-center flex-column">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Actions</th>
+              
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var uni in Model)
+                {
+                    <tr>
+                        <th scope="row">@uni.Id</th>
+                        <td>@uni.Name</td>
+                        <td>
+                            <div>
+                                <button class="btn btn-warning">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </div>
+                           
+                        </td>  
+                     
+                        
+                    </tr>
+                }
+            }
+            else
+            {
+                <h1>No universities</h1>
+            }
+         
+          
+           
+        </tbody>
+    </table>
+  
+
+
+</div>
