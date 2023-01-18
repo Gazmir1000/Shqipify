@@ -1,0 +1,10 @@
+﻿@model CommentViewModel
+
+<form asp-controller="Post" asp-action="Comment" method="post">
+    <input type="text" class="form-control" asp-for="PostId" hidden />
+    <input type="text" class="form-control" asp-for="Text"  />
+    <div>
+        <button type="submit" class="btn-outline-primary">Krijo</button>
+    </div>
+
+</form>

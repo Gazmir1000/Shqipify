@@ -30,8 +30,10 @@ namespace Shqipify.Controllers
             if (posts != null)
             {
                 List<PostViewModel> postList = new List<PostViewModel>();
+
                 foreach (var post in posts)
                 {
+                    List<Comments> comments = _context.Comments.Where(c => c.PostId == post.Id).ToList();
                     var temoPost = new PostViewModel()
                     {
                         Id = post.Id,
@@ -39,7 +41,8 @@ namespace Shqipify.Controllers
                         Description = post.Description,
                         Author = post.Author,
                         Image = post.Image,
-                        CreatedTime = post.CreatedTime
+                        CreatedTime = post.CreatedTime,
+                        Comments = comments
                     };
                     postList.Add(temoPost);
                 }
@@ -49,10 +52,10 @@ namespace Shqipify.Controllers
             {
                 return View();
             }
-                     
-          
+
+
         }
-         [Authorize]
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
@@ -96,6 +99,38 @@ namespace Shqipify.Controllers
          
         }
 
+
+        public async Task<IActionResult> CommentAsync(CommentViewModel commentData)
+        {
+            var loggedUser = await _userManager.GetUserAsync(User);
+
+
+            if (ModelState.IsValid && loggedUser != null)
+            {
+                var comment = new Comments()
+                {
+                    Id=commentData.Id,
+                    PostId = commentData.PostId,
+                    User = loggedUser,
+                    Text = commentData.Text
+
+
+                };
+                _context.Comments.Add(comment);
+                _context.SaveChanges();
+                TempData["successMessage"] = "Comment added successfully";
+                return RedirectToAction("Index");
+
+            }
+            else
+            {
+                TempData["errorMessage"] = "Model data nnot valid!";
+                return View("Index");
+
+            }
+
+
+        }
 
 
 
