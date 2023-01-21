@@ -1,4 +1,5 @@
-﻿using Shqipify.Models.DBEnteties;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Shqipify.Models.DBEnteties;
 using System.ComponentModel.DataAnnotations;
 
 namespace Shqipify.Models
@@ -21,6 +22,9 @@ namespace Shqipify.Models
         
         public DateTime CreatedTime { get; set; }
         public List<Comments>? Comments { get; set; }
+        public List<SelectListItem>? University { get; set; }
+        [Required]
+        public string? SelectedUni { get; set; }
 
     }
 }

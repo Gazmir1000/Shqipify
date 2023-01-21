@@ -8,8 +8,6 @@ namespace Shqipify.Models.DBEnteties
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [ForeignKey("UniveristyId")]
-        public int UniveristyId { get; set; }
         public string? UserId { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
@@ -17,5 +15,6 @@ namespace Shqipify.Models.DBEnteties
         public string? Author { get; set; }
         public DateTime CreatedTime { get; set; }
         public List<Comments>? Comments { get; set; }
+        public string? university { get; set; }
     }
 }

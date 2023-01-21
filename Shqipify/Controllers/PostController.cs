@@ -6,7 +6,7 @@ using Shqipify.Areas.Identity.Data;
 using Shqipify.DAL;
 using Shqipify.Models;
 using Shqipify.Models.DBEnteties;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Shqipify.Controllers
 {
@@ -59,7 +59,14 @@ namespace Shqipify.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            var universities = _context.Universities.ToList();
+            var model = new PostViewModel();
+            model.University = new List<SelectListItem>();
+            foreach(var u in universities)
+            {
+                model.University.Add(new SelectListItem { Text = u.Name, Value = u.Name });
+            }
+            return View(model);
         }
       
         [Authorize]
@@ -81,6 +88,7 @@ namespace Shqipify.Controllers
                     Author= loggedUser.Firstname +" "+ loggedUser.Lastname,
                     UserId= loggedUser.Id,
                     CreatedTime=DateTime.Now,
+                    university=postData.SelectedUni
                     
 
                 };
@@ -111,9 +119,8 @@ namespace Shqipify.Controllers
                 {
                     Id=commentData.Id,
                     PostId = commentData.PostId,
-                    User = loggedUser,
+                    UserId = loggedUser.Id,
                     Text = commentData.Text
-
 
                 };
                 _context.Comments.Add(comment);
@@ -129,10 +136,7 @@ namespace Shqipify.Controllers
 
             }
 
-
         }
-
-
 
 
     }

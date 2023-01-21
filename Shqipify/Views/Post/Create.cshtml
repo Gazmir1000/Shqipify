@@ -1,4 +1,7 @@
 ﻿@model Shqipify.Models.PostViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 @{
     var errorMessage = TempData["errorMessage"]?.ToString();
@@ -26,6 +29,11 @@
         <label for="post-image" class="form-label">Ngarko foto</label>
         <input type="text" class="form-control" asp-for="Image" />
        @* <input id="add-image" name="post-image" type="file" class="form-control" asp-for="Image" />*@
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label for="post-image" class="form-label">Select University</label>
+        <select class="form-select" asp-for="SelectedUni" asp-items="@Model.University"></select>
         <span asp-validation-for="Image" class="text-danger"></span>
     </div>
     <div>
