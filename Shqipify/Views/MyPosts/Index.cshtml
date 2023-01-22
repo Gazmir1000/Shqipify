@@ -26,34 +26,22 @@
         { 
         @foreach(var post in Model)
         {
-            <div class="col mb-3" style="max-width:700px">
-                <div class="card" style="width: 100%;">
-                    <img class="card-img-top" src="@post.Image" alt="Card image cap">
+            <div class="col mb-3" style="max-width:700px;width:100%">
+                <div class="card" style="width: 100%; box-shadow: 0 0 10px gray">
+                    <img class="card-img-top" style="width:100%;max-height:500px;object-fit:cover" src="@post.Image" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">@post.Title</h5>
-                        <p class="card-text">@post.Description</p>
+                        <h4 style="font-weight:700" class="card-title">@post.Title</h4>
+                        <p class="card-text" style="font-weight:500">@post.Description</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <strong>Author: @post.Author</strong>
-                            <strong>@post.CreatedTime.ToString("dd-MM-yyyy")</strong>
+                            <div style="background-color:cornflowerblue;color:white;padding:8px 16px;border-radius:6px;font-size:14px;font-weight:600">By: @post.Author</div>
+                            <div style="background-color:teal;color:white;padding:8px 16px;border-radius:6px;font-size:14px;font-weight:600">@post.SelectedUni</div>
+                            <div style="background-color:darkturquoise;color:white;padding:8px 16px;border-radius:6px;font-size:14px;font-weight:600">@post.CreatedTime.ToString("dd-MM-yyyy")</div>
                         </div>
-                        <strong>Comments(@post.Comments?.Count)</strong>
-                        <hr/>
-                        <div>
-                            @if(post.Comments !=null){
-                            @foreach(var comment in post.Comments)
-                            {
-                            <div>
-                                <div style="font-size:16px;font-weight:600;">@comment.Author</div>
-                                        <p>    @comment.Text</p>
-                            
-                                </div>
-                            }
-                            }
-                        </div>
+                      
                     </div>
                 </div>
-           
-        </div> 
+
+            </div>
         }
         }
             else{

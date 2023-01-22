@@ -42,7 +42,9 @@ namespace Shqipify.Controllers
                         Author = post.Author,
                         Image = post.Image,
                         CreatedTime = post.CreatedTime,
-                        Comments = comments
+                        Comments = comments,
+                        SelectedUni=post.university
+                      
                     };
                     postList.Add(temoPost);
                 }
