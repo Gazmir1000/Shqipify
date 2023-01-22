@@ -23,9 +23,15 @@
                         <th scope="row">@uni.Id</th>
                         <td>@uni.Name</td>
                         <td>
-                            <div>
-                                <button class="btn btn-warning">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                            <div style="d-flex">
+                               
+                                <form method="post" asp-action="Delete" asp-route-id="@uni.Id" >
+                                    <div style="d-flex">
+                                        <a asp-action="Edit" asp-route-id="@uni.Id" class="btn btn-warning">Edit</a>
+                                     <button type="submit" class="btn btn-danger">Delete</button>
+                                                 </div>
+                                </form>
+                               
                             </div>
                            
                         </td>  

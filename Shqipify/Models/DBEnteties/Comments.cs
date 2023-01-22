@@ -11,6 +11,6 @@ namespace Shqipify.Models.DBEnteties
         [ForeignKey("PostId")]
         public int PostId { get; set; }
         public string? Text { get; set; }
-        public string? UserId { get; set; }
+        public string? Author { get; set; }
     }
 }

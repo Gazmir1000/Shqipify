@@ -119,7 +119,7 @@ namespace Shqipify.Controllers
                 {
                     Id=commentData.Id,
                     PostId = commentData.PostId,
-                    UserId = loggedUser.Id,
+                    Author = loggedUser.Firstname + " "+ loggedUser.Lastname,
                     Text = commentData.Text
 
                 };

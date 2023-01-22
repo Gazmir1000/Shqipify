@@ -1,0 +1,19 @@
+﻿@model Shqipify.Models.UniversityViewModel
+
+
+<form action="Edit" method="post">
+      <div class="mb-2">
+        <label class="form-label">ID</label>
+        <input type="text" class="form-control" asp-for="Id" readonly />
+      
+    </div>
+    <div class="mb-2">
+        <label class="form-label">Titulli</label>
+        <input type="text" class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div>
+        <button type="submit" class="btn-outline-primary">Krijo</button>
+    </div>
+
+</form>

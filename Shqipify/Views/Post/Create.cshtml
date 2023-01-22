@@ -22,13 +22,14 @@
     </div>  
     <div class="mb-2">
         <label class="form-label">Pershkrimi</label>
-        <textarea class="form-control" asp-for="Description"></textarea>
+        <textarea class="form-control" asp-for="Description" rows="4"
+                  style="background: #fff;"></textarea>
         <span asp-validation-for="Description" class="text-danger" ></span>
     </div> 
     <div class="mb-2">
         <label for="post-image" class="form-label">Ngarko foto</label>
         <input type="text" class="form-control" asp-for="Image" />
-       @* <input id="add-image" name="post-image" type="file" class="form-control" asp-for="Image" />*@
+      
         <span asp-validation-for="Image" class="text-danger"></span>
     </div>
     <div class="mb-2">
