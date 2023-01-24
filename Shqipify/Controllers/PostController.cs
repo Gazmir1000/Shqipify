@@ -26,6 +26,7 @@ namespace Shqipify.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+  
             var posts = _context.Posts.ToList();
             if (posts != null)
             {

@@ -21,12 +21,24 @@
     </div>
   
 }
-<div class="d-flex justify-content-center align-items-center flex-column">
+<form asp-action="Index" method="post">
+    <div class="d-flex justify-content-center align-items-center flex-column">
+    <div class="input-group d-flex align-items-center justify-content-center mb-2">
+        <div class="form-outline">
+            <input id="search-input" style="width:100%;min-width:500px" name="searchString" type="search" class="form-control" />
+        </div>
+        <button id="search-button" type="submit" class="btn btn-primary">
+           Kerko
+        </button>
+    </div>
+</form>
+
     @if(Model!=null && Model.Any())
         { 
         @foreach(var post in Model)
         {
             <div class="col mb-3" style="max-width:700px">
+                
                 <div class="card" style="width: 100%; box-shadow: 0 0 10px gray">
                     <img class="card-img-top" style="width:100%;max-height:500px;object-fit:cover" src="@post.Image" alt="Card image cap">
                     <div class="card-body">
