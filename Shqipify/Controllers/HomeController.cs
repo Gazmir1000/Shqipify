@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Shqipify.Areas.Identity.Data;
+using Shqipify.DAL;
 using Shqipify.Models;
 using System.Diagnostics;
 
@@ -6,16 +9,21 @@ namespace Shqipify.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly UserManager<AppUser> _userManager;
+
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger ,UserManager<AppUser> userManager)
         {
             _logger = logger;
+            _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+            var loggedUser = await _userManager.GetUserAsync(User);
+            return View(loggedUser);
         }
 
         public IActionResult Privacy()

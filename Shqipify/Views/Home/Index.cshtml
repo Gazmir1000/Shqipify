@@ -1,8 +1,61 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Shqipify.Areas.Identity.Data.AppUser
+
+
+@{
+ ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="text-center mt-5">
+        <h1 class="display-4">Welcome @Model.Firstname @Model.Lastname</h1>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="d-flex justify-content-xl-between my-5 ">
+        <div class="p-5 border border-secondary card" style="box-shadow: 0 0 10px gray" className="cartShadow">
+            <a href="/post/create" class="text-dark text-decoration-none" style="font-size:40px; font-family: 'Montserrat', sans-serif;">Create post</a>
+        </div>
+        <div class="p-5 border border-secondary card" style="box-shadow: 0 0 10px gray">
+            <a href="/Post" class="text-dark text-decoration-none" style="font-size:40px; font-family: 'Montserrat', sans-serif;">Main Page</a>
+        </div>
+        <div class="p-5 border border-secondary card" style="box-shadow: 0 0 10px gray">
+            <a href="/MyPosts" class="text-dark text-decoration-none" style="font-size:40px; font-family: 'Montserrat', sans-serif;">My posts</a>
+        </div>
+    </div>
+
+}else{
+    <div class="text-center mt-5">
+        <h1 class="display-4">Welcome </h1>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="d-flex justify-content-xl-between my-5">
+        <div class="p-5 border border-secondary card" style="box-shadow: 0 0 10px gray">
+            <a href="/Post" class="text-dark text-decoration-none" style="font-size:40px; font-family: 'Montserrat', sans-serif;">Main Page</a>
+        </div>
+        <div class="p-5 border border-secondary card" style="box-shadow: 0 0 10px gray">
+            <a href="/Identity/Account/Login" class="text-dark text-decoration-none" style="font-size:40px; font-family: 'Montserrat', sans-serif;">Log In</a>
+        </div>
+    </div>
+}
+
