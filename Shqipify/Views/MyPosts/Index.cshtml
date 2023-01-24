@@ -26,7 +26,7 @@
         { 
         @foreach(var post in Model)
         {
-            <div class="col mb-3" style="max-width:700px;width:100%">
+            <div class="col mb-3" style="max-width:700px;width:100%;position:relative">
                 <div class="card" style="width: 100%; box-shadow: 0 0 10px gray">
                     <img class="card-img-top" style="width:100%;max-height:500px;object-fit:cover" src="@post.Image" alt="Card image cap">
                     <div class="card-body">
@@ -40,7 +40,19 @@
                       
                     </div>
                 </div>
+                <div  style="position:absolute;top:2px;right:2px">
+                    <form method="post" asp-action="DeletePost" asp-route-id="@post.Id">
+                        <div style="d-flex">
+                            <a asp-action="Update" asp-route-id="@post.Id" class="btn btn-warning">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </form>
 
+                </div>
             </div>
         }
         }

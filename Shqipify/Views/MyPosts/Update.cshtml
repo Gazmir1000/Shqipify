@@ -1,0 +1,53 @@
+﻿@model Shqipify.Models.PostViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var errorMessage = TempData["errorMessage"]?.ToString();
+
+}
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-error">
+        <strong>Error</strong> @errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dissmiss="alert"></button>
+    </div>
+}
+<form action="Update" method="post">
+    <div>
+        
+        <input type="text" class="form-control" asp-for="UserId" hidden />
+        <input type="text" class="form-control" asp-for="CreatedTime" hidden />
+        <input type="text" class="form-control" asp-for="Author" hidden />
+    </div>
+ 
+    <div class="mb-2">
+        <label class="form-label">Titulli</label>
+        <input type="text" class="form-control" asp-for="Title" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label class="form-label">Pershkrimi</label>
+        <textarea class="form-control" asp-for="Description" rows="4"
+                  style="background: #fff;"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label for="post-image" class="form-label">Ngarko foto</label>
+        <input type="text" class="form-control" asp-for="Image" />
+
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <div >
+        
+        <input class="form-select" asp-for="SelectedUni" hidden/>
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+
+    <div>
+        <button type="submit" class="btn-outline-primary">Perditeso</button>
+    </div>
+
+</form>
+
