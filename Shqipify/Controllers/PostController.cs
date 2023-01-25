@@ -48,10 +48,12 @@ namespace Shqipify.Controllers
                     };
                     postList.Add(temoPost);
                 }
+                TempData.Keep();
                 return View(postList);
             }
             else
             {
+                TempData.Keep();
                 return View();
             }
 
@@ -68,6 +70,7 @@ namespace Shqipify.Controllers
             {
                 model.University.Add(new SelectListItem { Text = u.Name, Value = u.Name });
             }
+            TempData.Keep();
             return View(model);
         }
       
@@ -103,6 +106,7 @@ namespace Shqipify.Controllers
             else
             {
                 TempData["errorMessage"] = "Model data nnot valid!";
+                TempData.Keep();
                 return View();
 
             }
@@ -128,12 +132,16 @@ namespace Shqipify.Controllers
                 _context.Comments.Add(comment);
                 _context.SaveChanges();
                 TempData["successMessage"] = "Comment added successfully";
+                TempData.Keep();
+
                 return RedirectToAction("Index");
 
             }
             else
             {
                 TempData["errorMessage"] = "Model data nnot valid!";
+                TempData.Keep();
+
                 return View("Index");
 
             }
